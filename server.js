@@ -32,7 +32,10 @@ app.post("/submit", (req, res) => {
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;");
 
-   
+    const safeAge = age
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
 
   res.send(`<!doctype html>
 <html lang="en">
@@ -40,7 +43,7 @@ app.post("/submit", (req, res) => {
   <body>
     <h1>Thanks!</h1>
     <p>You submitted: <strong>${safeName || "(empty)"}</strong></p>
-    <p>You submitted: <strong>${age || "(empty)"}</strong></p>
+    <p>You submitted: <strong>${safeAge || "(empty)"}</strong></p>
     <p><a href="/">Back</a></p>
   </body>
 </html>`);
